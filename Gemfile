@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 ruby "1.9.3"
 
-gem 'unicorn'
+group :production do
+  gem 'unicorn'
+end
 
 gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.1'
@@ -16,7 +18,8 @@ gem 'paperclip', '~> 3.0'
 gem 'ckeditor'
 gem 'aws-sdk'
 
-gem 'foreman'
+# version 0.63 causes an error
+gem 'foreman', '0.61'
 
 gem 'active_model_serializers'
 
