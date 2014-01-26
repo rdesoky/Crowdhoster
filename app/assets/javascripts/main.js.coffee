@@ -14,4 +14,4 @@ $ ->
   Crowdhoster.campaigns.init()
   Crowdhoster.theme.init()
 
-CKEDITOR.config.allozwedContent = true
+CKEDITOR.config.allowedContent = true
