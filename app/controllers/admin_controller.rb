@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   layout "admin"
   before_filter :authenticate_user!
-  before_filter :verify_admin
+  #before_filter :verify_admin
   before_filter :set_ct_env, only: [:admin_bank_setup, :ajax_verify]
 
   def admin_website
@@ -21,11 +21,11 @@ class AdminController < ApplicationController
 
   def admin_processor_setup
     if request.post?
-      flash.now[:error] = "Invalid credentials" and return if params[:ct_prod_api_key].blank? || params[:ct_prod_api_secret].blank?
+      flash.now[:error] = "Invalid credentials (api keys)" and return if params[:ct_prod_api_key].blank? || params[:ct_prod_api_secret].blank?
       if @settings.activate_payments(params[:ct_prod_api_key], params[:ct_prod_api_secret])
         flash.now[:success] = "Your payment processor is all set up!"
       else
-        flash.now[:error] = "Invalid credentials"
+        flash.now[:error] = "Invalid credentials (api keys)"
       end
     end
   end

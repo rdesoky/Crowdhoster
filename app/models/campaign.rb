@@ -4,6 +4,7 @@ class Campaign < ActiveRecord::Base
   has_many :faqs, dependent: :destroy, :order => 'sort_order'
   has_many :payments
   has_many :rewards
+  belongs_to :user
 
   attr_accessible :name, :goal_type, :goal_dollars, :goal_orders,  :expiration_date, :ct_campaign_id, :media_type,
                   :main_image, :main_image_delete, :video_embed_id, :video_placeholder, :video_placeholder_delete,
@@ -15,7 +16,7 @@ class Campaign < ActiveRecord::Base
                   :stats_number_of_contributions, :stats_raised_amount, :stats_tilt_percent,
                   :stats_unique_contributors, :published_flag, :collect_shipping, :production_flag,
                   :include_rewards, :reward_reference, :collect_additional_info, :additional_info_label,
-                  :include_comments, :comments_shortname
+                  :include_comments, :comments_shortname, :user_id
 
   attr_accessor :main_image_delete, :video_placeholder_delete, :facebook_image_delete
 

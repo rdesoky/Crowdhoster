@@ -1,10 +1,16 @@
 class Admin::CampaignsController < ApplicationController
   layout "admin"
   before_filter :authenticate_user!
-  before_filter :verify_admin
+  #before_filter :verify_admin
 
   def index
-    @campaigns = Campaign.order("created_at ASC")
+    if current_user.admin?
+      @campaigns = Campaign.order("created_at DESC")
+    else
+      @campaigns = Campaign.where(:user_id=>current_user.id).order("created_at DESC")
+    end
+    
+    
   end
 
   def new
@@ -54,7 +60,6 @@ class Admin::CampaignsController < ApplicationController
   def create
     is_default = params[:campaign].delete :is_default
     @campaign = Campaign.new(params[:campaign])
-
     # Check if the new settings pass validations...if not, re-render form and display errors in flash msg
     if !@campaign.valid?
       message = ''
@@ -84,13 +89,14 @@ class Admin::CampaignsController < ApplicationController
         billing_statement_text: @settings.billing_statement_text
       }
       @campaign.production_flag ? Crowdtilt.production(@settings) : Crowdtilt.sandbox
-      response = Crowdtilt.post('/campaigns', {campaign: campaign})
+      #response = Crowdtilt.post('/campaigns', {campaign: campaign})
     rescue => exception
       flash.now[:error] = exception.to_s
       render action: "new"
       return
     else
       @campaign.update_api_data(response['campaign'])
+      @campaign.user_id = current_user.id
       @campaign.save
 
       # Now that we've created the campaign, create new FAQs if any were provided

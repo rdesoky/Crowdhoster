@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   def verify_admin
     if !current_user.admin?
       redirect_to root_url, :flash => { :notice => "You must be an admin to access that page" }
-   end
+    end
   end
 
   def check_init

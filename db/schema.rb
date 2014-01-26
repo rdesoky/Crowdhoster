@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128003747) do
+ActiveRecord::Schema.define(:version => 20140120214913) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
@@ -70,6 +70,8 @@ ActiveRecord::Schema.define(:version => 20131128003747) do
     t.string   "additional_info_label"
     t.boolean  "include_comments",                     :default => false,        :null => false
     t.string   "comments_shortname"
+    t.integer  "owner"
+    t.integer  "user_id"
   end
 
   add_index "campaigns", ["slug"], :name => "index_campaigns_on_slug", :unique => true
@@ -139,7 +141,7 @@ ActiveRecord::Schema.define(:version => 20131128003747) do
   end
 
   create_table "settings", :force => true do |t|
-    t.string   "site_name",                   :default => "Crowdhoster",          :null => false
+    t.string   "site_name",                   :default => "XTravaCrowd",          :null => false
     t.string   "facebook_app_id"
     t.string   "tweet_text"
     t.string   "google_id"

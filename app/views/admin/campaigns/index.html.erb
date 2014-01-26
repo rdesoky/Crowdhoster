@@ -8,6 +8,9 @@
       <table class="table table-striped">
         <tr>
           <th>Name</th>
+          <% if current_user.admin? %>
+            <th>Owner</th>
+          <% end %>
           <th>Goal</th>
           <th>Raised</th>
           <th>Expiration<br/>Date</th>
@@ -21,7 +24,11 @@
 
       <% @campaigns.each do |campaign| %>
         <tr>
-          <td><%= campaign.name %></td>
+          <td><%= link_to campaign.name, campaign_home_path(campaign) %></td>
+
+          <% if current_user.admin? %>
+            <td><%= campaign.user.email %></td>
+          <% end %>
 
           <td>
             <% if campaign.goal_type == "dollars" %>
