@@ -193,7 +193,8 @@ class CampaignsController < ApplicationController
 
   def check_published
     if !@campaign.published_flag
-      unless user_signed_in? #&& current_user.admin?
+      #unless user_signed_in? && current_user.admin?
+      unless user_signed_in?
         redirect_to root_url, :flash => { :error => "Campaign is no longer available" }
       end
     end

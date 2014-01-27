@@ -89,7 +89,7 @@ class Admin::CampaignsController < ApplicationController
         billing_statement_text: @settings.billing_statement_text
       }
       @campaign.production_flag ? Crowdtilt.production(@settings) : Crowdtilt.sandbox
-      #response = Crowdtilt.post('/campaigns', {campaign: campaign})
+      response = Crowdtilt.post('/campaigns', {campaign: campaign})
     rescue => exception
       flash.now[:error] = exception.to_s
       render action: "new"
@@ -97,8 +97,12 @@ class Admin::CampaignsController < ApplicationController
     else
       @campaign.update_api_data(response['campaign'])
       @campaign.user_id = current_user.id
-      @campaign.save
-
+      if @campaign.save
+		#redirect_to admin_campaign_path, :notice => "New Campaign has been created"
+	  else
+		redirect_to root_path, :flash => {:error=>"Failed to save new campaign"}
+		return
+	  end
       # Now that we've created the campaign, create new FAQs if any were provided
       if params.has_key?(:faq)
         params[:faq].each do |faq|
