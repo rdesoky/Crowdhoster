@@ -3,3 +3,16 @@
 @import "header";
 @import "campaign";
 @import "homepage";
+
+.container,
+.navbar-fixed-top .container{
+	width:auto;
+	max-width: 940px;
+	padding:0px 10px;
+}
+
+#header .container h1{
+	width:auto;
+	max-width: 800px;
+}
+

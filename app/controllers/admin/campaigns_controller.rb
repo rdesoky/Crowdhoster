@@ -62,17 +62,17 @@ class Admin::CampaignsController < ApplicationController
     @campaign = Campaign.new(params[:campaign])
     # Check if the new settings pass validations...if not, re-render form and display errors in flash msg
     if !@campaign.valid?
-      message = ''
-      @campaign.errors.each do |key, error|
-        message = message + key.to_s.humanize + ' ' + error.to_s + ', '
-      end
-      flash.now[:error] = message[0...-2]
-      render action: "new"
-      return
+		message = ''
+		@campaign.errors.each do |key, error|
+			message = message + key.to_s.humanize + ' ' + error.to_s + ', '
+		end
+		flash.now[:error] = message[0...-2]
+		render action: "new"
+		return
     end
 
-     # Set the campaign user id
-     ct_user_id = @campaign.production_flag ? @settings.ct_production_admin_id : @settings.ct_sandbox_admin_id
+    # Set the campaign user id
+    ct_user_id = @campaign.production_flag ? @settings.ct_production_admin_id : @settings.ct_sandbox_admin_id
 
     # calculate the goal amount (in case of a tilt by orders campaign)
     @campaign.set_goal
@@ -81,71 +81,71 @@ class Admin::CampaignsController < ApplicationController
     # If it fails, echo the error message sent by the API back to the user
     # If successful, save the campaign
     begin
-      campaign = {
-        title: @campaign.name,
-        tilt_amount: (@campaign.goal_dollars*100).to_i,
-        expiration_date: @campaign.expiration_date,
-        user_id: ct_user_id,
-        billing_statement_text: @settings.billing_statement_text
-      }
-      @campaign.production_flag ? Crowdtilt.production(@settings) : Crowdtilt.sandbox
-      response = Crowdtilt.post('/campaigns', {campaign: campaign})
+		campaign = {
+			title: @campaign.name,
+			tilt_amount: (@campaign.goal_dollars*100).to_i,
+			expiration_date: @campaign.expiration_date,
+			user_id: ct_user_id,
+			billing_statement_text: @settings.billing_statement_text
+		}
+		@campaign.production_flag ? Crowdtilt.production(@settings) : Crowdtilt.sandbox
+		response = Crowdtilt.post('/campaigns', {campaign: campaign})
     rescue => exception
-      flash.now[:error] = exception.to_s
-      render action: "new"
-      return
-    else
-      @campaign.update_api_data(response['campaign'])
-      @campaign.user_id = current_user.id
-      if @campaign.save
-		#redirect_to admin_campaign_path, :notice => "New Campaign has been created"
-	  else
-		redirect_to root_path, :flash => {:error=>"Failed to save new campaign"}
+		flash.now[:error] = exception.to_s
+		render action: "new"
 		return
-	  end
-      # Now that we've created the campaign, create new FAQs if any were provided
-      if params.has_key?(:faq)
-        params[:faq].each do |faq|
-          if !faq['question'].empty?
-            @campaign.faqs.create question: faq['question'], answer: faq['answer']
-          end
-        end
-      end
+    else
+		@campaign.update_api_data(response['campaign'])
+		@campaign.user_id = current_user.id
+		if @campaign.save
+			#redirect_to admin_campaign_path, :notice => "New Campaign has been created"
+		else
+			redirect_to root_path, :flash => {:error=>"Failed to save new campaign"}
+			return
+		end
+		# Now that we've created the campaign, create new FAQs if any were provided
+		if params.has_key?(:faq)
+			params[:faq].each do |faq|
+				if !faq['question'].empty?
+					@campaign.faqs.create question: faq['question'], answer: faq['answer']
+				end
+			end
+		end
 
-      # Now that we've created the campaign, create new Reward Levels if any were provided
-      if params.has_key?(:reward)
-        params[:reward].each do |reward|
-          unless reward['delete'] && reward['delete'] == 'delete'
-              @campaign.rewards.create title: reward['title'],
-                                       description: reward['description'],
-                                       delivery_date: reward['delivery_date'],
-                                       number: reward['number'].to_i,
-                                       price: reward['price'].to_f
-          end
-        end
-      end
+		# Now that we've created the campaign, create new Reward Levels if any were provided
+		if params.has_key?(:reward)
+			params[:reward].each do |reward|
+				unless reward['delete'] && reward['delete'] == 'delete'
+					@campaign.rewards.create title: reward['title'],
+						description: reward['description'],
+						delivery_date: reward['delivery_date'],
+						number: reward['number'].to_i,
+						price: reward['price'].to_f
+				end
+			end
+		end
 
-      # Check again for campaign validity now that we've added faqs and rewards
-      if !@campaign.valid?
-        message = ''
-        @campaign.errors.each do |key, error|
-          message = message + key.to_s.humanize + ' ' + error.to_s + ', '
-        end
-        flash.now[:error] = message[0...-2]
-        render action: "new"
-        return
-      end
+		# Check again for campaign validity now that we've added faqs and rewards
+		if !@campaign.valid?
+			message = ''
+			@campaign.errors.each do |key, error|
+				message = message + key.to_s.humanize + ' ' + error.to_s + ', '
+			end
+			flash.now[:error] = message[0...-2]
+			render action: "new"
+			return
+		end
 
-      # Set default campaign
-      if(is_default == "1")
-        @settings.default_campaign_id = @campaign.id
-      elsif (@settings.default_campaign_id == @campaign.id)
-        @settings.default_campaign_id = nil
-      end
-      @settings.save
+		# Set default campaign
+		if(is_default == "1")
+			@settings.default_campaign_id = @campaign.id
+		elsif (@settings.default_campaign_id == @campaign.id)
+			@settings.default_campaign_id = nil
+		end
+		@settings.save
 
-      redirect_to campaign_home_url(@campaign), :flash => { :notice => "Campaign updated!" }
-      return
+		redirect_to campaign_home_url(@campaign), :flash => { :notice => "Campaign updated!" }
+		return
     end
   end
 
