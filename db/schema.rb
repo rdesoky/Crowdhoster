@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(:version => 20140120214913) do
     t.string   "additional_info_label"
     t.boolean  "include_comments",                     :default => false,        :null => false
     t.string   "comments_shortname"
-    t.integer  "owner"
     t.integer  "user_id"
   end
 
