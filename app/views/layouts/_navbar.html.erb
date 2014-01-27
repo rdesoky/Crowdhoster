@@ -23,7 +23,7 @@
            </li>
          <% end %>
 
-         <% if params[:controller] == 'campaigns' %>
+         <% if params[:controller] == 'campaigns' && ( current_user.admin? || @campaign.user_id == current_user.id ) %>
            <li>
              <a href="<%= edit_admin_campaign_path(@campaign) %>"><i class="icon-edit icon-white"></i> Edit campaign</a>
            </li>
