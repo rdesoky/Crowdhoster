@@ -6,17 +6,48 @@
 
 .container,
 .navbar-fixed-top .container{
-	width:100%;
+	width:auto;
 	max-width: 940px;
 	padding:0px 5px;
 }
 
 #header .container h1{
-	width:100%;
+	width:auto;
 	max-width: 800px;
 }
 
 #signin .well{
-	width:100%;
+	width:auto;
 	max-width: 400px;
+}
+img{
+	max-width: 100% !important;
+}
+#campaign #funding_area #image,
+#campaign #funding_area #backing,
+#campaign #funding_area #progress_bg,
+#campaign #faq ul li,
+video{
+	max-width:100% !important;
+}
+
+#campaign #funding_area #backing{
+	margin: 0px;
+	padding:20px;
+	box-sizing: border-box;
+}
+#campaign #funding_area .share{
+	margin-left:0px;
+}
+
+#campaign #funding_area #image{
+	height:auto;
+}
+
+#campaign #funding_area #backing .stats{
+	padding: 0px 10px;
+}
+.blue_button{
+	width:auto;
+	padding:15px 20px;
 }
