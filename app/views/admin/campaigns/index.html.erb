@@ -25,8 +25,8 @@
                 <%= link_to 'View', campaign_home_path(campaign) %> | 
                 <%= link_to 'Payments', admin_campaigns_payments_path(campaign) %> | 
                 <%= link_to 'Copy', admin_campaigns_copy_path(campaign) %> | 
-                <%= link_to 'Delete', "campaigns/" + campaign.id.to_s,
-                                :confirm => "Campaign " + campaign.name + " will be deleted, Are you sure?",
+                <%= link_to 'Delete', admin_campaign_path(campaign), 
+                                :confirm => "Campaign '#{campaign.name}' will be deleted, Are you sure?",
                                 :method => :delete %>
             
           </td>
