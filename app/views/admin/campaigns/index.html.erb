@@ -16,15 +16,21 @@
           <th>Expiration<br/>Date</th>
           <th>Published?</th>
           <th>Payments<br/>Activated?</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
         </tr>
 
       <% @campaigns.each do |campaign| %>
         <tr>
-          <td><%= link_to campaign.name, campaign_home_path(campaign) %></td>
+          <td>
+            <h4><%= campaign.name %></h4>
+                <%= link_to 'Edit', edit_admin_campaign_path(campaign) %> | 
+                <%= link_to 'View', campaign_home_path(campaign) %> | 
+                <%= link_to 'Payments', admin_campaigns_payments_path(campaign) %> | 
+                <%= link_to 'Copy', admin_campaigns_copy_path(campaign) %> | 
+                <%= link_to 'Delete', "campaigns/" + campaign.id.to_s,
+                                :confirm => "Campaign " + campaign.name + " will be deleted, Are you sure?",
+                                :method => :delete %>
+            
+          </td>
 
           <% if current_user.admin? %>
             <td><%= campaign.user.email %></td>
@@ -48,11 +54,6 @@
           <td><%= Date.parse(campaign.expiration_date.to_s).strftime("%m/%d/%Y") %></td>
           <td><%= campaign.published_flag ? raw('<i class="icon-ok"></i>') : '' %></td>
           <td><%= campaign.production_flag ? raw('<i class="icon-ok"></i>') : '' %></td>
-          <td><%= link_to 'Edit', edit_admin_campaign_path(campaign) %></td>
-          <td><%= link_to 'View', campaign_home_path(campaign) %></td>
-          <td><%= link_to 'Payments', admin_campaigns_payments_path(campaign) %></td>
-          <td><%= link_to 'Copy', admin_campaigns_copy_path(campaign) %></td>
-          <td><%= link_to 'Delete', "campaigns/" + campaign.id.to_s, :confirm => "Are you sure?", :method => :delete %></td>
         </tr>
       <% end %>
       </table>
