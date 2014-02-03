@@ -14,7 +14,9 @@
 		<li data-active-set="FsComments">Comments</li>
 		<li data-active-set="FsCheckout">Checkout</li>
 		<li data-active-set="FsSharingDetails">Sharing</li>
-		<li data-active-set="FsPublish">Publish</li>
+		<% if current_user.admin? %>
+			<li data-active-set="FsPublish">Publish</li>
+		<% end %>
 		<li data-active-set="FsPaymentMode">Payment</li>
 		<li data-active-set="FsApiEndPoint">APIs</li>
 	</ul>
