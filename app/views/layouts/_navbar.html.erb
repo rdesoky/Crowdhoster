@@ -17,7 +17,7 @@
 	
 						<% if !@campaign.production_flag %>
 							<li class="status red show_tooltip" data-placement="bottom" data-title="Transactions WILL NOT be processed">
-								Sandbox payments
+								Sandbox
 							</li>
 						<% else %>
 							<li class="status green show_tooltip" data-placement="bottom" data-title="Transactions WILL be processed">
@@ -32,7 +32,7 @@
 				<ul class="nav pull-left">
 					<li>
 						<%= image_tag 'user_icon.png' %>
-						<%= link_to current_user.fullname, user_settings_path %>
+						<%= link_to current_user.fullname, admin_campaigns_path %>
 					</li>
 
 					<% if current_page?(root_path) %>
@@ -42,8 +42,6 @@
 					<!-- li><a href="<%= url_for new_admin_campaign_path %>"><i class="icon-plus icon-white"></i> New Campaign</a></li -->
 					<% end %>
 
-					<li><%= link_to "Admin", admin_campaigns_path %></li>
-					
 					<li><%= link_to "Sign Out", destroy_user_session_path, method: "delete" %></li>
 				</ul>
 			</div>
