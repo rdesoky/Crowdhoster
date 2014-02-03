@@ -18,7 +18,9 @@
 			<li data-active-set="FsPublish">Publish</li>
 		<% end %>
 		<li data-active-set="FsPaymentMode">Payment</li>
-		<li data-active-set="FsApiEndPoint">APIs</li>
+		<% if @campaign.persisted? %>
+			<li data-active-set="FsApiEndPoint">APIs</li>
+		<% end %>
 	</ul>
 
 <%= form_for([:admin, @campaign], multipart: true, html: { class: "campaign_form", id: "admin_campaign_form" }) do |f| %>
