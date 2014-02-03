@@ -260,7 +260,11 @@ class Admin::CampaignsController < ApplicationController
       redirect_to campaign_home_url(@campaign), :flash => { :notice => "Campaign updated!" } and return
     end
   end
-
+  def destroy
+	@campaign = Campaign.find(params[:id])
+	@campaign.destroy
+	redirect_to admin_campaigns_path, :notice=> "Campaign has been deleted"
+  end
   def payments
 #     @campaign = Campaign.find(params[:id])
 #     page = params[:page] || 1

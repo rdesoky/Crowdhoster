@@ -52,6 +52,7 @@
           <td><%= link_to 'View', campaign_home_path(campaign) %></td>
           <td><%= link_to 'Payments', admin_campaigns_payments_path(campaign) %></td>
           <td><%= link_to 'Copy', admin_campaigns_copy_path(campaign) %></td>
+          <td><%= link_to 'Delete', "campaigns/" + campaign.id.to_s, :confirm => "Are you sure?", :method => :delete %></td>
         </tr>
       <% end %>
       </table>

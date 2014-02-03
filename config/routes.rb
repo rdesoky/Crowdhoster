@@ -22,6 +22,7 @@ Crowdhoster::Application.routes.draw do
   
   resources :users
 
+  # match '/admin/campaigns/:id/delete',         to: 'admin/campaigns#delete',                as: :admin_campaigns_delete
   match '/admin/campaigns/:id/copy',           to: 'admin/campaigns#copy',                  as: :admin_campaigns_copy
   match '/admin/campaigns/:id/payments',       to: 'admin/campaigns#payments',              as: :admin_campaigns_payments
   match '/admin/processor-setup',              to: 'admin#admin_processor_setup',           as: :admin_processor_setup
