@@ -107,8 +107,13 @@ video{
 .campaign_actions{
 	margin-top:5px;
 	background-color: #E0E0E0;
-	padding: 4px;
+	padding: 6px;
 	border-radius: 5px;
+	line-height: 25px;
+}
+
+.campaign_actions a{
+	font-size: 16px;
 }
 
 #FormNavBar.nav-tabs{
@@ -152,4 +157,13 @@ video{
 #admin_campaigns[data-active-set=FsApiEndPoint] fieldset[data-active-set=FsApiEndPoint]
 {
 	display: block;
+}
+
+#admin #admin_website .field .explanation,
+#admin #admin_campaigns .field .explanation,
+.field .explanation {
+	float: none;
+	width:auto;
+	border-bottom: solid 1px white;
+	padding-bottom: 5px;
 }
