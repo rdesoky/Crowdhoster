@@ -110,3 +110,46 @@ video{
 	padding: 4px;
 	border-radius: 5px;
 }
+
+#FormNavBar.nav-tabs{
+	margin:0px;
+}
+
+#FormNavBar.nav-tabs li{
+	padding:5px 10px;
+	border-radius: 4px 4px 0px 0px;
+	cursor:default;
+}
+
+#admin_campaigns[data-active-set=FsBasicInformation] > #FormNavBar li[data-active-set=FsBasicInformation],
+#admin_campaigns[data-active-set=FsPaymentDetails] > #FormNavBar li[data-active-set=FsPaymentDetails],
+#admin_campaigns[data-active-set=FsRewards] > #FormNavBar li[data-active-set=FsRewards],
+#admin_campaigns[data-active-set=FsPageContent] > #FormNavBar li[data-active-set=FsPageContent],
+#admin_campaigns[data-active-set=FsComments] > #FormNavBar li[data-active-set=FsComments],
+#admin_campaigns[data-active-set=FsCheckout] > #FormNavBar li[data-active-set=FsCheckout],
+#admin_campaigns[data-active-set=FsSharingDetails] > #FormNavBar li[data-active-set=FsSharingDetails],
+#admin_campaigns[data-active-set=FsPublish] > #FormNavBar li[data-active-set=FsPublish],
+#admin_campaigns[data-active-set=FsPaymentMode] > #FormNavBar li[data-active-set=FsPaymentMode],
+#admin_campaigns[data-active-set=FsApiEndPoint] > #FormNavBar li[data-active-set=FsApiEndPoint]
+{
+	color: white;
+	background-color: #0088cc;
+}
+
+#admin_campaigns fieldset{
+	display: none;
+}
+
+#admin_campaigns[data-active-set=FsBasicInformation] fieldset[data-active-set=FsBasicInformation],
+#admin_campaigns[data-active-set=FsPaymentDetails] fieldset[data-active-set=FsPaymentDetails],
+#admin_campaigns[data-active-set=FsRewards] fieldset[data-active-set=FsRewards],
+#admin_campaigns[data-active-set=FsPageContent] fieldset[data-active-set=FsPageContent],
+#admin_campaigns[data-active-set=FsComments] fieldset[data-active-set=FsComments],
+#admin_campaigns[data-active-set=FsCheckout] fieldset[data-active-set=FsCheckout],
+#admin_campaigns[data-active-set=FsSharingDetails] fieldset[data-active-set=FsSharingDetails],
+#admin_campaigns[data-active-set=FsPublish] fieldset[data-active-set=FsPublish],
+#admin_campaigns[data-active-set=FsPaymentMode] fieldset[data-active-set=FsPaymentMode],
+#admin_campaigns[data-active-set=FsApiEndPoint] fieldset[data-active-set=FsApiEndPoint]
+{
+	display: block;
+}
