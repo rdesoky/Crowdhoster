@@ -2,7 +2,10 @@
 	<div class="container content_box clearfix">
 
 		<!-- render 'admin/header', active: 'campaigns' -->
-		<h3><%= link_to @settings.site_name, root_path, :class => 'show_loader', :'data-loader' => "admin_header" %> > Edit > <%= @campaign.name %></h3>
+		<h3><%= link_to @settings.site_name, root_path, :class => 'show_loader', :'data-loader' => "admin_header" %>
+			> <%= link_to "Edit", admin_campaigns_path %>
+			> <%= @campaign.name %>
+		</h3>
 	  
 		<%= render 'form' %>
 	</div>
