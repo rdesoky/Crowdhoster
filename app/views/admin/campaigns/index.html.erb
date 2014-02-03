@@ -18,6 +18,13 @@
           <td>
             <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
             <div>
+                Raised:
+                <% if campaign.goal_type == "dollars" %>
+                    $<%= number_with_precision(campaign.stats_raised_amount.to_f, precision: 2) %>
+                <% else %>
+                    <%= campaign.orders %>
+                <% end %>
+                <br/>
                 Gool: 
                 <% if campaign.goal_type == "dollars" %>
                   $<%= number_with_precision(campaign.goal_dollars.to_f, precision: 2) %>
