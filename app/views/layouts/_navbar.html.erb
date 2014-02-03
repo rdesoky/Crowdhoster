@@ -6,9 +6,11 @@
       <ul class="nav pull-left">
 
          <% if current_page?(root_path) %>
+           <% if current_user.admin? %>
            <li>
              <a href="<%= url_for admin_website_path %>"><i class="icon-edit icon-white"></i> Edit homepage</a>
            </li>
+           <% end %>
            <li>
               <a href="<%= url_for new_admin_campaign_path %>"><i class="icon-plus icon-white"></i> New Campaign</a>
            </li>
@@ -25,7 +27,7 @@
 
          <% if params[:controller] == 'campaigns' && ( current_user.admin? || @campaign.user_id == current_user.id ) %>
            <li>
-             <a href="<%= edit_admin_campaign_path(@campaign) %>"><i class="icon-edit icon-white"></i>Edit</a>
+             <a href="<%= edit_admin_campaign_path(@campaign) %>"><!-- i class="icon-edit icon-white"></i -->Edit</a>
            </li>
 
            <% if !@campaign.published_flag %>
@@ -72,6 +74,5 @@
       </div>
     </div>
   </div>
-  <div class="spacer" style="height:30px; width: 100%"></div>
 </div>
 <% end %>
