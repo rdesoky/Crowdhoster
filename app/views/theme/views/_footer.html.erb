@@ -2,8 +2,9 @@
   <div class="container clearfix">
     <p class="pull-right">© <%= @settings.copyright_text %>
     | <a target="_blank" href="http://www.crowdhoster.com/privacy">Privacy Policy</a>
-    | <%= link_to :Home, :root %>
-    | <%= link_to :Admin, :admin_campaigns %>
+    <% if !current_user %>
+      | <%= link_to "Sign In", :admin_campaigns %>
+    <% end %>
     </p>
   </div>
 </div>

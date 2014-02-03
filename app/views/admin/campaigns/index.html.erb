@@ -32,7 +32,7 @@
           </td>
 
           <% if current_user.admin? %>
-            <td><%= campaign.user.email %></td>
+            <td title="<%= campaign.user.email %>"><%= campaign.user.fullname %></td>
           <% end %>
 
           <td>

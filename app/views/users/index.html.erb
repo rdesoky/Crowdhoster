@@ -1,13 +1,14 @@
-<div class="container content_box clear_fix">
-<h3>User List</h3>
-<% @users.each do |user| %>
-  <div>
-	<hr/>
-	<div>Name: <%= user.fullname %></div>
-	<div>Email: <%= user.email %></div>
-	<div>Created: <%= user.created_at %></div>
-	<div>Last SignIn: <%= user.last_sign_in_at %></div>
+<div id="admin">
+  <div id="admin_users" class="container content_box clear_fix">
+	<%= render 'admin/header', active: 'users' %>
+	<% @users.each do |user| %>
+	  <div>
+		<hr/>
+		<div>Name: <%= user.fullname %></div>
+		<div>Email: <%= user.email %></div>
+		<div>Created: <%= user.created_at %></div>
+		<div>Last SignIn: <%= user.last_sign_in_at %></div>
+	  </div>
+	<% end %>
   </div>
-<% end %>
-
 </div>

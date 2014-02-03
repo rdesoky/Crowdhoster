@@ -18,6 +18,9 @@
   <li class="<%= 'active' if active == 'notifications' %>">
     <%= link_to "Notification Settings", admin_notification_setup_path, :class => 'show_loader', :'data-loader' => "admin_header" %>
   </li>
+  <li class="<%= 'active' if active == 'users' %>">
+    <%= link_to "Users", users_path, :class => 'show_loader', :'data-loader' => "admin_header" %>
+  </li>
 </ul>
 
 <% end %>

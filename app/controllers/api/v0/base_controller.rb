@@ -1,6 +1,6 @@
 class Api::V0::BaseController < ActionController::Base
   serialization_scope nil
-  before_filter :authenticate_api!
+  #before_filter :authenticate_api!
 
   rescue_from ActiveRecord::RecordNotFound do
     head :not_found

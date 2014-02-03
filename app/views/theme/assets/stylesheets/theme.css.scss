@@ -4,6 +4,9 @@
 @import "campaign";
 @import "homepage";
 
+.navbar{
+	margin-bottom:0px;
+}
 .container,
 .navbar-fixed-top .container{
 	width:auto;
@@ -50,4 +53,50 @@ video{
 .blue_button{
 	width:auto;
 	padding:15px 20px;
+}
+
+#navbar{
+  height:auto;
+  font-size:20px;
+/*  position: fixed;
+  width:100%;*/
+}
+#navbar .navbar-inner{
+  min-height: 0;
+}
+#navbar li{
+  line-height: 25px;
+}
+#navbar img{
+  height:25px;
+  width:auto;
+}
+.dropdown-menu a{
+  line-height: normal;
+}
+.caret, .icon-white{
+  vertical-align: middle;
+}
+
+#header{
+  width: auto;
+/*  position: static;
+  padding-top:50px;
+*/}
+#header .container{
+	/*position: static;*/
+}
+.navbar-inner{
+	padding-left:0px;
+	padding-right:0px;
+}
+#admin{
+	margin-top:0px;
+}
+
+#admin h3{
+	margin-top:20px;
+}
+#footer{
+	padding:30px 10px;
 }
