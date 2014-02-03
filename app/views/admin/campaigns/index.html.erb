@@ -11,16 +11,24 @@
           <% if current_user.admin? %>
             <th>Owner</th>
           <% end %>
-          <th>Raised<br/>/ Goal</th>
-          <th>Expiration<br/>Date</th>
-          <th>Published?</th>
-          <th>Payments<br/>Activated?</th>
         </tr>
 
       <% @campaigns.each do |campaign| %>
         <tr>
           <td>
-            <h4><%= campaign.name %></h4>
+            <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
+            <div>
+                Gool: 
+                <% if campaign.goal_type == "dollars" %>
+                  $<%= number_with_precision(campaign.goal_dollars.to_f, precision: 2) %>
+                <% else %>
+                  <%= campaign.goal_orders %>
+                <% end %><br/>
+                Expires On: <%= Date.parse(campaign.expiration_date.to_s).strftime("%m/%d/%Y") %><br/>
+                Published: <%= campaign.published_flag ? raw('<i class="icon-ok"></i>') : 'no' %><br/>
+                Payments Activated: <%= campaign.production_flag ? raw('<i class="icon-ok"></i>') : 'no' %>
+            </div>
+            <div class="campaign_actions">
                 <%= link_to 'Edit', edit_admin_campaign_path(campaign) %> | 
                 <%= link_to 'View', campaign_home_path(campaign) %> | 
                 <%= link_to 'Payments', admin_campaigns_payments_path(campaign) %> | 
@@ -28,30 +36,13 @@
                 <%= link_to 'Delete', admin_campaign_path(campaign), 
                                 :confirm => "Campaign '#{campaign.name}' will be deleted, Are you sure?",
                                 :method => :delete %>
-            
+            </div>
           </td>
 
           <% if current_user.admin? %>
             <td title="<%= campaign.user.email %>"><%= campaign.user.fullname %></td>
           <% end %>
 
-          <td>
-            <% if campaign.goal_type == "dollars" %>
-              $<%= number_with_precision(campaign.stats_raised_amount.to_f, precision: 2) %>
-            <% else %>
-              <%= campaign.orders %>
-            <% end %>
-            <br/>/
-            <% if campaign.goal_type == "dollars" %>
-              $<%= number_with_precision(campaign.goal_dollars.to_f, precision: 2) %>
-            <% else %>
-              <%= campaign.goal_orders %>
-            <% end %>
-          </td>
-
-          <td><%= Date.parse(campaign.expiration_date.to_s).strftime("%m/%d/%Y") %></td>
-          <td><%= campaign.published_flag ? raw('<i class="icon-ok"></i>') : '' %></td>
-          <td><%= campaign.production_flag ? raw('<i class="icon-ok"></i>') : '' %></td>
         </tr>
       <% end %>
       </table>

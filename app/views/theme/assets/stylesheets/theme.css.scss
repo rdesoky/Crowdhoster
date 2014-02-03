@@ -57,7 +57,7 @@ video{
 
 #navbar{
   height:auto;
-  font-size:20px;
+  font-size:15px;
 /*  position: fixed;
   width:100%;*/
 }
@@ -99,4 +99,10 @@ video{
 }
 #footer{
 	padding:30px 10px;
+}
+
+.campaign_actions{
+	margin-top:5px;
+	background-color: #ddd;
+	padding: 4px;
 }
