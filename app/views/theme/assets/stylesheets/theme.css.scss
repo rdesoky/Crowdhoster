@@ -62,7 +62,10 @@ video{
   width:100%;*/
 }
 #navbar .navbar-inner{
-  min-height: 0;
+	min-height: 0;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;  
 }
 #navbar li{
   line-height: 25px;
@@ -103,6 +106,7 @@ video{
 
 .campaign_actions{
 	margin-top:5px;
-	background-color: #ddd;
+	background-color: #E0E0E0;
 	padding: 4px;
+	border-radius: 5px;
 }
