@@ -25,13 +25,17 @@
 }
 #campaign img{
 	max-width: 100% !important;
-	width:auto !important;
-	height:auto !important;
 }
+
+#campaign #campaign_body .main_content.narrow{
+	width: auto !important;	
+}
+
 #campaign #funding_area #image,
 #campaign #funding_area #backing,
 #campaign #funding_area #progress_bg,
 #campaign #faq ul li,
+#campaign #funding_area #video,
 video{
 	max-width:100% !important;
 }
