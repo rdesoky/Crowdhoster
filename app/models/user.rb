@@ -12,5 +12,8 @@ class User < ActiveRecord::Base
   # Validate presece of user inputs.
   # (most in this model are handled by Devise -- email, password, and password_confirmation)
   validates :fullname, presence: true
+  
+  has_many :campaign
+ 
 
 end
