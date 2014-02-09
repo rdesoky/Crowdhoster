@@ -17,6 +17,9 @@
                 <% @campaigns.each do |campaign| %>
                 <tr>
                     <td>
+                        <% if campaign.media_type == 'image' %>
+                            <%= image_tag campaign.main_image.url(:main), width:100, class:"pull-right" %>
+                        <% end %>
                         <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
                         <div>
                             Raised:
@@ -38,7 +41,6 @@
                         </div>
                         <div class="campaign_actions">
                             <%= link_to 'Edit', edit_admin_campaign_path(campaign) %> | 
-                            <%= link_to 'View', campaign_home_path(campaign) %> | 
                             <%= link_to 'Payments', admin_campaigns_payments_path(campaign) %> | 
                             <%= link_to 'Copy', admin_campaigns_copy_path(campaign) %> | 
                             <%= link_to 'Delete', admin_campaign_path(campaign), 
