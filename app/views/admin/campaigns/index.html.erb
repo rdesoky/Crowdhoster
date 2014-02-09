@@ -3,6 +3,9 @@
 
         <%= render 'admin/header', active: 'campaigns' %>
     
+        <% if params[:owner] %>
+            <h4>Campains created by: <%= User.find(params[:owner]).fullname %></h4>
+        <% end %>
         <div id="admin_campaigns">
             <% if @campaigns.length > 0 %>
     
