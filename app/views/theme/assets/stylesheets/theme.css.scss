@@ -145,15 +145,21 @@ video{
 #admin_campaigns[data-active-set=FsComments] > #FormNavBar li[data-active-set=FsComments],
 #admin_campaigns[data-active-set=FsCheckout] > #FormNavBar li[data-active-set=FsCheckout],
 #admin_campaigns[data-active-set=FsSharingDetails] > #FormNavBar li[data-active-set=FsSharingDetails],
+#admin_campaigns[data-active-set=FsApiEndPoint] > #FormNavBar li[data-active-set=FsApiEndPoint],
 #admin_campaigns[data-active-set=FsPublish] > #FormNavBar li[data-active-set=FsPublish],
 #admin_campaigns[data-active-set=FsPaymentMode] > #FormNavBar li[data-active-set=FsPaymentMode],
-#admin_campaigns[data-active-set=FsApiEndPoint] > #FormNavBar li[data-active-set=FsApiEndPoint]
+
+#admin_website[data-active-set=FsBasicInformation] > #FormNavBar li[data-active-set=FsBasicInformation],
+#admin_website[data-active-set=FsSharingDetails] > #FormNavBar li[data-active-set=FsSharingDetails],
+#admin_website[data-active-set=FsGoogleAnalytics] > #FormNavBar li[data-active-set=FsGoogleAnalytics],
+#admin_website[data-active-set=FsFooterContent] > #FormNavBar li[data-active-set=FsFooterContent],
+#admin_website[data-active-set=FsAdvanced] > #FormNavBar li[data-active-set=FsAdvanced]
 {
 	color: white;
 	background-color: #0088cc;
 }
 
-#admin_campaigns fieldset{
+#admin_campaigns fieldset, #admin_website fieldset{
 	display: none;
 }
 
@@ -166,7 +172,16 @@ video{
 #admin_campaigns[data-active-set=FsSharingDetails] fieldset[data-active-set=FsSharingDetails],
 #admin_campaigns[data-active-set=FsPublish] fieldset[data-active-set=FsPublish],
 #admin_campaigns[data-active-set=FsPaymentMode] fieldset[data-active-set=FsPaymentMode],
-#admin_campaigns[data-active-set=FsApiEndPoint] fieldset[data-active-set=FsApiEndPoint]
+#admin_campaigns[data-active-set=FsApiEndPoint] fieldset[data-active-set=FsApiEndPoint],
+#admin_campaigns[data-active-set=FsGoogleAnalytics] fieldset[data-active-set=FsGoogleAnalytics],
+#admin_campaigns[data-active-set=FsFooterContent] fieldset[data-active-set=FsFooterContent],
+#admin_campaigns[data-active-set=FsAdvanced] fieldset[data-active-set=FsAdvanced],
+
+#admin_website[data-active-set=FsBasicInformation] fieldset[data-active-set=FsBasicInformation],
+#admin_website[data-active-set=FsSharingDetails] fieldset[data-active-set=FsSharingDetails],
+#admin_website[data-active-set=FsGoogleAnalytics] fieldset[data-active-set=FsGoogleAnalytics],
+#admin_website[data-active-set=FsFooterContent] fieldset[data-active-set=FsFooterContent],
+#admin_website[data-active-set=FsAdvanced] fieldset[data-active-set=FsAdvanced]
 {
 	display: block;
 }
