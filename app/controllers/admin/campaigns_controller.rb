@@ -5,7 +5,11 @@ class Admin::CampaignsController < ApplicationController
 
   def index
     if current_user.admin?
-      @campaigns = Campaign.order("created_at DESC")
+		if params[:owner]
+		    @campaigns = Campaign.where(:user_id=>params[:owner]).order("created_at DESC")
+		else
+			@campaigns = Campaign.order("created_at DESC")
+		end
     else
       @campaigns = Campaign.where(:user_id=>current_user.id).order("created_at DESC")
     end

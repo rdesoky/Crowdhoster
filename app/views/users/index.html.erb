@@ -4,7 +4,7 @@
 	<% @users.each do |user| %>
 	  <div>
 		<hr/>
-		<div>Name: <%= user.fullname %></div>
+		<div>Name: <%= link_to user.fullname, admin_campaigns_path(owner: user) %></div>
 		<div>Email: <%= user.email %></div>
 		<div>Created: <%= user.created_at %></div>
 		<div>Last SignIn: <%= user.last_sign_in_at %></div>

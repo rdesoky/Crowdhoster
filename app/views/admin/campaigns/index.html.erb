@@ -48,13 +48,15 @@
                     </td>
           
                     <% if current_user.admin? %>
-                    <td title="<%= campaign.user.email %>"><%= campaign.user.fullname %></td>
+                    <td title="<%= campaign.user.email %>">
+                        <%= link_to campaign.user.fullname, admin_campaigns_path(owner: campaign.user) %>
+                    </td>
                     <% end %>
                 </tr>
                 <% end %>
                 </table>
             <% else %>
-                <h4>You haven't created any campaign yet.</h4>
+                <h4>No campaigns created yet.</h4>
             <% end %>
     
             <h4> + <%= link_to 'New Campaign', new_admin_campaign_path %></h4>
