@@ -4,6 +4,7 @@ Crowdhoster::Application.routes.draw do
 
   # PAGES
   root                                         to: 'pages#index'
+  #user_root                                  to: 'admin/campaigns#index'
 
   # USERS
   devise_for :users, { path: 'account', controllers: { registrations: :registrations } }  do
