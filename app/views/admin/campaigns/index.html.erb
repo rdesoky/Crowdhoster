@@ -1,60 +1,63 @@
 <div id="admin">
-  <div class="container content_box clearfix">
+    <div class="container content_box clearfix">
 
-  <%= render 'admin/header', active: 'campaigns' %>
-
-    <div id="admin_campaigns">
-
-      <table class="table table-striped">
-        <tr>
-          <th>Name</th>
-          <% if current_user.admin? %>
-            <th>Owner</th>
-          <% end %>
-        </tr>
-
-      <% @campaigns.each do |campaign| %>
-        <tr>
-          <td>
-            <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
-            <div>
-                Raised:
-                <% if campaign.goal_type == "dollars" %>
-                    $<%= number_with_precision(campaign.stats_raised_amount.to_f, precision: 2) %>
-                <% else %>
-                    <%= campaign.orders %>
+        <%= render 'admin/header', active: 'campaigns' %>
+    
+        <div id="admin_campaigns">
+            <% if @campaigns.length > 0 %>
+    
+                <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <% if current_user.admin? %>
+                    <th>Owner</th>
+                    <% end %>
+                </tr>
+        
+                <% @campaigns.each do |campaign| %>
+                <tr>
+                    <td>
+                        <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
+                        <div>
+                            Raised:
+                            <% if campaign.goal_type == "dollars" %>
+                                $<%= number_with_precision(campaign.stats_raised_amount.to_f, precision: 2) %>
+                            <% else %>
+                                <%= campaign.orders %>
+                            <% end %>
+                            <br/>
+                            Gool: 
+                            <% if campaign.goal_type == "dollars" %>
+                              $<%= number_with_precision(campaign.goal_dollars.to_f, precision: 2) %>
+                            <% else %>
+                              <%= campaign.goal_orders %>
+                            <% end %><br/>
+                            Expires On: <%= Date.parse(campaign.expiration_date.to_s).strftime("%m/%d/%Y") %><br/>
+                            Published: <%= campaign.published_flag ? raw('<i class="icon-ok"></i>') : 'no' %><br/>
+                            Payments Activated: <%= campaign.production_flag ? raw('<i class="icon-ok"></i>') : 'no' %>
+                        </div>
+                        <div class="campaign_actions">
+                            <%= link_to 'Edit', edit_admin_campaign_path(campaign) %> | 
+                            <%= link_to 'View', campaign_home_path(campaign) %> | 
+                            <%= link_to 'Payments', admin_campaigns_payments_path(campaign) %> | 
+                            <%= link_to 'Copy', admin_campaigns_copy_path(campaign) %> | 
+                            <%= link_to 'Delete', admin_campaign_path(campaign), 
+                                            :confirm => "Campaign '#{campaign.name}' will be deleted, Are you sure?",
+                                            :method => :delete %>
+                        </div>
+                    </td>
+          
+                    <% if current_user.admin? %>
+                    <td title="<%= campaign.user.email %>"><%= campaign.user.fullname %></td>
+                    <% end %>
+                </tr>
                 <% end %>
-                <br/>
-                Gool: 
-                <% if campaign.goal_type == "dollars" %>
-                  $<%= number_with_precision(campaign.goal_dollars.to_f, precision: 2) %>
-                <% else %>
-                  <%= campaign.goal_orders %>
-                <% end %><br/>
-                Expires On: <%= Date.parse(campaign.expiration_date.to_s).strftime("%m/%d/%Y") %><br/>
-                Published: <%= campaign.published_flag ? raw('<i class="icon-ok"></i>') : 'no' %><br/>
-                Payments Activated: <%= campaign.production_flag ? raw('<i class="icon-ok"></i>') : 'no' %>
-            </div>
-            <div class="campaign_actions">
-                <%= link_to 'Edit', edit_admin_campaign_path(campaign) %> | 
-                <%= link_to 'View', campaign_home_path(campaign) %> | 
-                <%= link_to 'Payments', admin_campaigns_payments_path(campaign) %> | 
-                <%= link_to 'Copy', admin_campaigns_copy_path(campaign) %> | 
-                <%= link_to 'Delete', admin_campaign_path(campaign), 
-                                :confirm => "Campaign '#{campaign.name}' will be deleted, Are you sure?",
-                                :method => :delete %>
-            </div>
-          </td>
-
-          <% if current_user.admin? %>
-            <td title="<%= campaign.user.email %>"><%= campaign.user.fullname %></td>
-          <% end %>
-
-        </tr>
-      <% end %>
-      </table>
-
-      <h4> + <%= link_to 'New Campaign', new_admin_campaign_path %></h4>
+                </table>
+            <% else %>
+                <h4>You haven't created any campaign yet.</h4>
+            <% end %>
+    
+            <h4> + <%= link_to 'New Campaign', new_admin_campaign_path %></h4>
+        </div>
     </div>
-  </div>
 </div>

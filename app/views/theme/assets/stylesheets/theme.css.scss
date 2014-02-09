@@ -125,6 +125,7 @@ video{
 
 .campaign_actions a{
 	font-size: 16px;
+	margin:0px 4px;
 }
 
 #FormNavBar.nav-tabs{
@@ -177,4 +178,7 @@ video{
 	width:auto;
 	border-bottom: solid 1px white;
 	padding-bottom: 5px;
+}
+#admin #admin_campaigns h4{
+	margin:20px 4px;
 }
