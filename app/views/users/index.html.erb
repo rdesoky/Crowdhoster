@@ -4,15 +4,16 @@
 		<div class="admin_users_list">
 			<% @users.each do |user| %>
 			<div class="user_frame">
-				<div>Name: <%= link_to user.fullname, admin_campaigns_path(owner: user) %></div>
-				<div>Email: <%= user.email %></div>
-				<% if user.campaign.length > 0 %>
+				<div>Name: <%= link_to user.fullname, admin_campaigns_path(owner: user) %> ( <%= user.email %> ) </div>
 				<div><%= link_to "Campaigns", admin_campaigns_path(owner: user) %> :
+				<% if user.campaign.length > 0 %>
 					<% user.campaign.each do |cmp| %>
 						( <%= link_to cmp.name, edit_admin_campaign_path(cmp) %> ) 
 					<% end %>
-				</div>
+				<% else %>
+					none
 				<% end %>
+				</div>
 				<div>Admin: <%= user.admin? ? "yes" : "no" %></div>
 				<div>Created: <%= user.created_at %></div>
 				<div>Last SignIn: <%= user.last_sign_in_at %></div>
