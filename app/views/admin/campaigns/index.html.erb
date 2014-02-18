@@ -17,14 +17,23 @@
                     <% end %>
                 </tr>
         
-                <% @campaigns.each do |campaign| %>
+                <%  @campaigns.each do |campaign| %>
                 <tr>
                     <td>
                         <% if campaign.media_type == 'image' %>
-                            <%= image_tag campaign.main_image.url(:main), width:100, class:"pull-right" %>
+                            <%= link_to ( image_tag campaign.main_image.url(:main), width:100, class:"pull-right" ), campaign_home_path(campaign) %>
                         <% end %>
                         <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
                         <div>
+                            <%
+                            if campaign.facebook_page
+                                info = FbGraph::Page.new(campaign.facebook_page).fetch
+                            %>
+                                Likes: <%= info.like_count %> <br/>
+                                Talking About: <%= info.talking_about_count %> <br/>
+                            <%
+                            end
+                            %>
                             Raised:
                             <% if campaign.goal_type == "dollars" %>
                                 $<%= number_with_precision(campaign.stats_raised_amount.to_f, precision: 2) %>
