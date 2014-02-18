@@ -6,6 +6,11 @@
 			> <%= link_to "Edit", admin_campaigns_path %>
 			> <%= link_to @campaign.name, campaign_home_path( @campaign ) %>
 		</h3>
+		<% if current_user.admin? %>
+			<h4 title="<%= @campaign.user.email %>">
+				Owner: <%= link_to @campaign.user.fullname, admin_campaigns_path(owner: @campaign.user) %>
+			</h4>
+		<% end %>
 	  
 		<%= render 'form' %>
 	</div>

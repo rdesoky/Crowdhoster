@@ -51,16 +51,19 @@
 			<div class="field clearfix">
 				<p class="explanation">You can choose to set your goal based on the dollar amount you raise, or by the number of orders your contributors make.</p>
 				<label>Goal</label>
-				<label><input id="goal_type_dollars" name="campaign[goal_type]" value="dollars" type="radio" <%= @campaign.goal_type == 'dollars' ? "checked" : "" %> >Dollar Amount</label>
+				<label><input id="goal_type_dollars" name="campaign[goal_type]" value="dollars" type="radio"
+							  <%= @campaign.goal_type == 'dollars' ? "checked" : "" %>
+						>Dollar Amount
+				</label>
 	
-				<div class="amount_input currency" style="<%= @campaign.goal_type == 'dollars' ? "" : "display:none" %>">
+				<div class="amount_input currency">
 					<%= f.text_field :goal_dollars, value: (number_with_precision(f.object.goal_dollars, :precision => 2) || 0) %>
 					<span style="position:absolute">$</span>
 				</div>
 	
 				<label><input id="goal_type_orders" name="campaign[goal_type]" value="orders" type="radio" <%= @campaign.goal_type == 'orders' ? "checked" : "" %>>Number of Orders</label>
 	
-				<div class="orders_input" style="<%= @campaign.goal_type == 'orders' ? "" : "display:none" %>">
+				<div class="orders_input">
 					<%= f.text_field :goal_orders, value: (f.object.goal_orders || 0) %>
 				</div>
 			</div>
@@ -76,12 +79,12 @@
 			<legend>Payment Details</legend>
 	
 			<div class="field clearfix">
-				<div id="flexible_payment_options" style="<%= @campaign.goal_type == 'dollars' ? "" : "display:none" %>">
+				<div id="flexible_payment_options">
 					<label><input id="campaign_payment_type_any" name="campaign[payment_type]" value="any" type="radio" <%= @campaign.payment_type == 'any' ? "checked" : "" %>><strong>Any</strong> amount is fine.</label>
 			
 					<label><input id="campaign_payment_type_min" name="campaign[payment_type]" value="min" type="radio" <%= @campaign.payment_type == 'min' ? "checked" : "" %>>Require a <strong>minimum amount</strong> for each contribution. <i>(ex. $10 min. contribution)</i></label>
 			
-					<div id="min-amount" style="<%= @campaign.payment_type == 'min' ? "" : "display:none" %>">
+					<div id="min-amount">
 						<label class="inline"><strong>Minimum amount: $ &nbsp;</strong></label>
 						<%= f.text_field :min_payment_amount, value: (number_with_precision(f.object.min_payment_amount, :precision => 2) || 0) %>
 					</div>
@@ -89,7 +92,7 @@
 				
 				<label><input id="campaign_payment_type_fixed" name="campaign[payment_type]" value="fixed" type="radio" <%= (@campaign.payment_type == 'fixed' || @campaign.goal_type == 'orders') ? "checked" : "" %>>Require a <strong>specific amount</strong> from all contributors. <i>(ex. $150 from each person)</i></label>
 		
-				<div id="preset-amount" style="<%= @campaign.payment_type == 'fixed' ? "" : "display:none" %>">
+				<div id="preset-amount">
 					<label class="inline"><strong>Preset amount: $ &nbsp;</strong></label>
 					<%= f.text_field :fixed_payment_amount, value: (number_with_precision(f.object.fixed_payment_amount, :precision => 2) || 0) %>
 				</div>
@@ -303,47 +306,8 @@
 				<%= f.cktext_area :confirmation_page_content %>
 			</div>
 		</fieldset>
-	
-		<fieldset data-active-set="FsSharingDetails">
-			<legend>Sharing Details</legend>
-
-			<div class="field clearfix">
-				<p class="explanation">Your own created <a href="https://www.facebook.com/bookmarks/pages" target="_blank">Facebook Page Name</a> for this campaign.</p>
-				<label>Facebook Page Name (<a href="https://www.facebook.com/pages/create/" target="_blank">Click here to create a page</a>) </label>
-				<%= f.text_field :facebook_page, size: 100 %>
-			</div>
-
-			<div class="field clearfix">
-				<p class="explanation">The title shown when your site is shared via Facebook. Leave this blank if you want to use your project name.</p>
-				<label>Facebook Title</label>
-				<%= f.text_field :facebook_title %>
-			</div>
 		
-			<div class="field clearfix">
-				<p class="explanation">The description shown when your site is shared via Facebook.</p>
-				<label>Facebook Description</label>
-				<%= f.text_area :facebook_description, rows: 2 %>
-			</div>
-		
-			<div class="field clearfix">
-				<p class="explanation">The image shown when your site is shared via facebook. This should have a square aspect ratio and be at least 200px by 200px</p>
-				<label>Facebook Image</label>
-				<% if @campaign.facebook_image.file? %>
-				  <%= image_tag @campaign.facebook_image.url(:thumb) %><br/>
-				  <%= f.file_field :facebook_image %><br/>
-				  <%= f.check_box :facebook_image_delete %><span>Delete current image</span>
-				<% else %>
-				  <%= f.file_field :facebook_image %>
-				<% end  %>
-			</div>
-
-			<div class="field clearfix">
-				<p class="explanation">This is the default text that will be used for the tweet button.</p>
-				<label>Tweet Text</label>
-				<%= f.text_area :tweet_text, rows: 2 %>
-			</div>
-	  
-		</fieldset>
+		<%= render "sharing", f: f %>	
 	
 		<% if current_user.admin? %>
 		<fieldset data-active-set="FsPublish">
@@ -363,10 +327,10 @@
 				<% if !f.object.production_flag %>
 					<p class="explanation">Campaigns remain in 'sandbox' mode until you choose to activate real payments. This lets you run test transactions on the campaign. WARNING: once you activate payments, you cannot go back to sandbox mode.</p>
 					<% if @settings.payments_activated? %>
-					  <label>Activate payments?</label>
-					  <%= f.check_box :production_flag %>
+						<label>Activate payments?</label>
+						<%= f.check_box :production_flag %>
 					<% else %>
-					  You must set up your payment processor before activating payments. Visit "Payment Settings" from the admin menu to do this.
+						You must set up your payment processor before activating payments. Visit "Payment Settings" from the admin menu to do this.
 					<% end %>
 				<% else %>
 					<p class="explanation">You have activated payments for this campaign, which means transactions WILL be processed. This cannot be undone for this campaign. If you activated payments by mistake, we recommend ending and un-publishing this campaign and creating a new one.</p>

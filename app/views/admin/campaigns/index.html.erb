@@ -26,11 +26,15 @@
                         <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
                         <div>
                             <%
-                            if campaign.facebook_page
+                            if campaign.facebook_page == 'request'
+                            %>
+                                <b>** Facebook Page requested</b><br/>
+                            <%
+                            elsif campaign.facebook_page 
                                 info = FbGraph::Page.new(campaign.facebook_page).fetch
                             %>
-                                Likes: <%= info.like_count %> <br/>
-                                Talking About: <%= info.talking_about_count %> <br/>
+                                Facebook Page: <%= link_to campaign.facebook_page, info.link %>
+                                (Likes: <%= info.like_count %>) (Talking About: <%= info.talking_about_count %>)<br/>
                             <%
                             end
                             %>
