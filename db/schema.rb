@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140120214913) do
+ActiveRecord::Schema.define(:version => 20140218104026) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
@@ -70,9 +70,15 @@ ActiveRecord::Schema.define(:version => 20140120214913) do
     t.string   "additional_info_label"
     t.boolean  "include_comments",                     :default => false,        :null => false
     t.string   "comments_shortname"
+    t.integer  "owner"
     t.integer  "user_id"
+    t.string   "facebook_page"
+    t.integer  "facebook_page_likes"
+    t.integer  "facebook_page_talking"
   end
 
+  add_index "campaigns", ["facebook_page_likes"], :name => "index_campaigns_on_facebook_page_likes"
+  add_index "campaigns", ["facebook_page_talking"], :name => "index_campaigns_on_facebook_page_talking"
   add_index "campaigns", ["slug"], :name => "index_campaigns_on_slug", :unique => true
 
   create_table "ckeditor_assets", :force => true do |t|

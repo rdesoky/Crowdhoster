@@ -85,4 +85,9 @@ class ApplicationController < ActionController::Base
     return amount_cents.ceil
   end
 
+
+  def fb_token
+    return ENV['FB_TOKEN']
+  end
+
 end

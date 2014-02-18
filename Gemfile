@@ -57,4 +57,6 @@ end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
+gem 'fb_graph'
+
 gem 'crowdtilt', github: 'msaint/crowdtilt'
