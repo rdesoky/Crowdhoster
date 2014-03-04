@@ -10,16 +10,15 @@
 				<% if @campaign.facebook_page == "request" %>
 					<label>** Facebook Page requested ** </label>
 					<p><%= link_to "Click here to create a page", "http://www.facebook.com/pages/create", target: "_blank" %></p>
-
-					<%= f.text_field :facebook_page, size: 100 %>
 				<% elsif @campaign.facebook_page && @campaign.facebook_page.size > 0
 					info = FbGraph::Page.new(@campaign.facebook_page).fetch
 				%>
 					<label>Facebook Page ( <%= link_to info.name, info.link, target: "_blank" %> ) </label>
-					<p><%= f.text_field :facebook_page, size: 100 %></p>
 				<% else %>
 					<label>No Facebook Page requested</label>
 				<% end %>
+
+				<p><%= f.text_field :facebook_page, size: 100 %></p>
 
 			
 			<% elsif @campaign.facebook_page && @campaign.facebook_page.size>0 && @campaign.facebook_page != "request"
