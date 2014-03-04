@@ -30,10 +30,10 @@
                             %>
                                 <b>** Facebook Page requested</b><br/>
                             <%
-                            elsif campaign.facebook_page 
+                            elsif campaign.facebook_page && campaign.facebook_page.size > 0
                                 info = FbGraph::Page.new(campaign.facebook_page).fetch
                             %>
-                                Facebook Page: <%= link_to campaign.facebook_page, info.link %>
+                                Facebook Page: <%= link_to info.name, info.link, target: "_blank" %>
                                 (Likes: <%= info.like_count %>) (Talking About: <%= info.talking_about_count %>)<br/>
                             <%
                             end

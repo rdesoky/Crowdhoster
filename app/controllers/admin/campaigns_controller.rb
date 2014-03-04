@@ -99,6 +99,7 @@ class Admin::CampaignsController < ApplicationController
 		else
 			@campaign.update_api_data(response['campaign'])
 			@campaign.user_id = current_user.id
+			@campaign.facebook_admin = current_user.email
 			if @campaign.save
 				#redirect_to admin_campaign_path, :notice => "New Campaign has been created"
 			else
@@ -153,6 +154,10 @@ class Admin::CampaignsController < ApplicationController
   
 	def edit
 		@campaign = Campaign.find(params[:id])
+		if not @campaign.facebook_admin
+			@campaign.facebook_admin = @campaign.user.email
+		end
+		
 	end
   
 	def update

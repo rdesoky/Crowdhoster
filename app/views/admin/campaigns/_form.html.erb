@@ -11,16 +11,16 @@
 		<li data-active-set="FsBasicInformation">Basic Information</li>
 		<li data-active-set="FsPaymentDetails">Payment Details</li>
 		<li data-active-set="FsPageContent">Page Content</li>
+		<li data-active-set="FsSharingDetails">Sharing</li>
 		<li data-active-set="FsRewards">Rewards</li>
 		<!--<li data-active-set="FsComments">Comments</li>-->
 		<li data-active-set="FsCheckout">Checkout</li>
-		<li data-active-set="FsSharingDetails">Sharing</li>
 		<% if current_user.admin? %>
 			<li data-active-set="FsPublish">Publish</li>
 		<% end %>
 		<li data-active-set="FsPaymentMode">Payment</li>
 		<% if @campaign.persisted? %>
-			<li data-active-set="FsApiEndPoint">APIs</li>
+			<!--<li data-active-set="FsApiEndPoint">APIs</li>-->
 		<% end %>
 	</ul>
 

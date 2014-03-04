@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218104026) do
+ActiveRecord::Schema.define(:version => 20140304064623) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20140218104026) do
     t.string   "facebook_page"
     t.integer  "facebook_page_likes"
     t.integer  "facebook_page_talking"
+    t.string   "facebook_admin"
   end
 
   add_index "campaigns", ["facebook_page_likes"], :name => "index_campaigns_on_facebook_page_likes"
@@ -199,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20140218104026) do
     t.string   "fullname"
     t.boolean  "admin",                            :default => false
     t.boolean  "wants_admin_payment_notification", :default => true,  :null => false
+    t.string   "facebook_user"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

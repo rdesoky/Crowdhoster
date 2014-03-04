@@ -5,24 +5,45 @@
 
 		<div class="field clearfix">
 			<% if current_user.admin? %>
-				<p class="explanation">Campaign Facebook page <a href="https://www.facebook.com/bookmarks/pages" target="_blank">Browse</a>.</p>
+				<p class="explanation">Campaign Facebook page <%= link_to "Browse", "https://www.facebook.com/bookmarks/pages", target: "_blank" %>.</p>
 				
-				<label>Facebook Page Name (<a href="https://www.facebook.com/pages/create/" target="_blank">
-					Click here to create a page</a>)
-				</label>
-				<%= f.text_field :facebook_page, size: 100 %>
-			<% elsif @campaign.facebook_page != "request" %>
-				<p class="explanation">Your campaign Facebook page ( <a href="https://www.facebook.com/<%=@campaign.facebook_page%>" target="_blank"><%=@campaign.facebook_page%></a> )</p>
-				Please <%= link_to "visit the page",  "https://www.facebook.com/" + @campaign.facebook_page %> and "Like" it to get an Admin role on it.
-			<% else %>
+				<% if @campaign.facebook_page == "request" %>
+					<label>** Facebook Page requested ** </label>
+					<p><%= link_to "Click here to create a page", "http://www.facebook.com/pages/create", target: "_blank" %></p>
+
+					<%= f.text_field :facebook_page, size: 100 %>
+				<% elsif @campaign.facebook_page && @campaign.facebook_page.size > 0
+					info = FbGraph::Page.new(@campaign.facebook_page).fetch
+				%>
+					<label>Facebook Page ( <%= link_to info.name, info.link, target: "_blank" %> ) </label>
+					<p><%= f.text_field :facebook_page, size: 100 %></p>
+				<% else %>
+					<label>No Facebook Page requested</label>
+				<% end %>
+
+			
+			<% elsif @campaign.facebook_page && @campaign.facebook_page.size>0 && @campaign.facebook_page != "request"
+				info = FbGraph::Page.new(@campaign.facebook_page).fetch
+			%>
+			
+				<p class="explanation">Your campaign Facebook page ( <%= link_to info.name, info.link %> )</p>
+				<p>Please <%= link_to "visit the page",  "https://www.facebook.com/" + @campaign.facebook_page %> and "Like" it to get an Admin role on it.</p>
+
+				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<%=@campaign.facebook_page%>&amp;width&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=true&amp;stream=false&amp;show_border=false&amp;appId=663078533736362" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:62px;" allowTransparency="true"></iframe>
+
+				<p class="explanation">Your Facebook User Email:</p>
+				<%= f.text_field :facebook_admin %>
+
+			<% else
+				check_val = @campaign.facebook_page && @campaign.facebook_page.size>0 ? @campaign.facebook_page : "request";
+			%>
 				<p class="explanation">It is recommended to share your campaign via Facebook page.</p>
-				<label><%= f.check_box :facebook_page, {}, @campaign.facebook_page || "request", ""%> Request Facebook page</label>
+				<label><%= f.check_box :facebook_page, {}, check_val, ""%> Request Facebook page</label>
+				
 			<% end %>
 		</div>
 		
-		
-		
-		
+<!-- 		
 		<div class="field clearfix">
 			<p class="explanation">The title shown when your site is shared via Facebook. Leave this blank if you want to use your project name.</p>
 			<label>Facebook Title</label>
@@ -53,4 +74,5 @@
 			<%= f.text_area :tweet_text, rows: 2 %>
 		</div>
   
+-->
 	</fieldset>
