@@ -14,12 +14,18 @@
 					info = FbGraph::Page.new(@campaign.facebook_page).fetch
 				%>
 					<label>Facebook Page ( <%= link_to info.name, info.link, target: "_blank" %> ) </label>
+
 				<% else %>
 					<label>No Facebook Page requested</label>
 				<% end %>
 
+				<p>&nbsp;</p>
+				<p class="explanation">Current Campaign Facebook Page:</p>
 				<p><%= f.text_field :facebook_page, size: 100 %></p>
 
+				<p>&nbsp;</p>
+				<p class="explanation">Admin Email: ( required to be the content admin )</p>
+				<%= f.text_field :facebook_admin %>
 			
 			<% elsif @campaign.facebook_page && @campaign.facebook_page.size>0 && @campaign.facebook_page != "request"
 				info = FbGraph::Page.new(@campaign.facebook_page).fetch
@@ -29,8 +35,9 @@
 				<p>Please <%= link_to "visit the page",  "https://www.facebook.com/" + @campaign.facebook_page, target: "_blank" %> and "Like" it to get an Admin role on it.</p>
 
 				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<%=@campaign.facebook_page%>&amp;width&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=true&amp;stream=false&amp;show_border=false&amp;appId=663078533736362" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:62px;" allowTransparency="true"></iframe>
-
-				<p class="explanation">Your Facebook User Email:</p>
+				
+				<p>&nbsp;</p>
+				<p class="explanation">Your Facebook Account Email: ( required to make you the page admin )</p>
 				<%= f.text_field :facebook_admin %>
 
 			<% else
