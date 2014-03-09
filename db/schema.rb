@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304064623) do
+ActiveRecord::Schema.define(:version => 20140309133148) do
 
   create_table "campaigns", :force => true do |t|
     t.string   "name"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20140304064623) do
     t.integer  "facebook_page_likes"
     t.integer  "facebook_page_talking"
     t.string   "facebook_admin"
+    t.string   "facebook_page_name"
   end
 
   add_index "campaigns", ["facebook_page_likes"], :name => "index_campaigns_on_facebook_page_likes"

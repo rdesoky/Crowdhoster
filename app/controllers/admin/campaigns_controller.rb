@@ -322,6 +322,7 @@ class Admin::CampaignsController < ApplicationController
 		campaigns.each do |campaign|
 			begin
 				info = FbGraph::Page.new(campaign.facebook_page).fetch
+				campaign.facebook_page_name = info.name
 				campaign.facebook_page_likes = info.like_count
 				campaign.facebook_page_talking = info.talking_about_count
 				campaign.save()

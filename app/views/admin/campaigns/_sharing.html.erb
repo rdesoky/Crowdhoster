@@ -11,7 +11,7 @@
 					<label>** Facebook Page requested ** </label>
 					<p><%= link_to "Click here to create a page", "http://www.facebook.com/pages/create", target: "_blank" %></p>
 				<% elsif @campaign.facebook_page && @campaign.facebook_page.size > 0 %>
-					<label>Facebook Page: <%= link_to @campaign.facebook_page, "http://www.facebook.com/" + @campaign.facebook_page, target: "_blank" %></label>
+					<label>Facebook Page: <%= link_to @campaign.facebook_page_name, "http://www.facebook.com/" + @campaign.facebook_page, target: "_blank" %></label>
 				<% else %>
 					<label>No Facebook Page requested</label>
 				<% end %>

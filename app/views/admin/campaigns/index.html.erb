@@ -33,7 +33,7 @@
                             <% if campaign.facebook_page == 'request' %>
                                 <b>** Facebook Page requested</b><br/>
                             <% elsif campaign.facebook_page && campaign.facebook_page.size > 0 %>
-                                Facebook Page: <%= link_to campaign.facebook_page, "http://www.facebook.com/" + campaign.facebook_page, target: "_blank" %>
+                                Facebook Page: <%= link_to campaign.facebook_page_name, "http://www.facebook.com/" + campaign.facebook_page, target: "_blank" %>
                                 (Likes: <%= campaign.facebook_page_likes%>) (Talking About: <%= campaign.facebook_page_talking %>)<br/>
                             <% end %>
                             
