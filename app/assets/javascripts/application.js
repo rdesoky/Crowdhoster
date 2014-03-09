@@ -25,6 +25,7 @@
 //= require main
 //= require admin
 //= require campaigns
+//= require campaigns_js
 //= require theme
 //= require validate
 //= require event_tracking

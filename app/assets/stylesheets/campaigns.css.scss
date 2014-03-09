@@ -238,3 +238,18 @@
 }
 
 
+.loader_frame{
+  .loader{
+    position: absolute;
+    display: none;
+  }
+}
+
+.loader_frame.loading{
+  .loader{
+    display: inline-block;
+  }
+  .hide_on_loading{
+    visibility: hidden;
+  }
+}

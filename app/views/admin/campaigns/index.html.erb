@@ -2,7 +2,12 @@
     <div class="container content_box clearfix">
 
         <%= render 'admin/header', active: 'campaigns' %>
-    
+        
+        <div class="loader_frame" id="UpdateFacebookFrame">
+            <span class="loader"></span>
+            <button id="UpdateFacebook" class="hide_on_loading">Refresh Facebook Likes</button>
+        </div>
+        
         <% if params[:owner] %>
             <h4>Campains created by: <%= User.find(params[:owner]).fullname %></h4>
         <% end %>
@@ -25,19 +30,13 @@
                         <% end %>
                         <h4><%= link_to campaign.name, campaign_home_path(campaign) %></h4>
                         <div>
-                            <%
-                            if campaign.facebook_page == 'request'
-                            %>
+                            <% if campaign.facebook_page == 'request' %>
                                 <b>** Facebook Page requested</b><br/>
-                            <%
-                            elsif campaign.facebook_page && campaign.facebook_page.size > 0
-                                info = FbGraph::Page.new(campaign.facebook_page).fetch
-                            %>
-                                Facebook Page: <%= link_to info.name, info.link, target: "_blank" %>
-                                (Likes: <%= info.like_count %>) (Talking About: <%= info.talking_about_count %>)<br/>
-                            <%
-                            end
-                            %>
+                            <% elsif campaign.facebook_page && campaign.facebook_page.size > 0 %>
+                                Facebook Page: <%= link_to campaign.facebook_page, "http://www.facebook.com/" + campaign.facebook_page, target: "_blank" %>
+                                (Likes: <%= campaign.facebook_page_likes%>) (Talking About: <%= campaign.facebook_page_talking %>)<br/>
+                            <% end %>
+                            
                             Raised:
                             <% if campaign.goal_type == "dollars" %>
                                 $<%= number_with_precision(campaign.stats_raised_amount.to_f, precision: 2) %>

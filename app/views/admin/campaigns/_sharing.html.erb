@@ -10,11 +10,8 @@
 				<% if @campaign.facebook_page == "request" %>
 					<label>** Facebook Page requested ** </label>
 					<p><%= link_to "Click here to create a page", "http://www.facebook.com/pages/create", target: "_blank" %></p>
-				<% elsif @campaign.facebook_page && @campaign.facebook_page.size > 0
-					info = FbGraph::Page.new(@campaign.facebook_page).fetch
-				%>
-					<label>Facebook Page ( <%= link_to info.name, info.link, target: "_blank" %> ) </label>
-
+				<% elsif @campaign.facebook_page && @campaign.facebook_page.size > 0 %>
+					<label>Facebook Page: <%= link_to @campaign.facebook_page, "http://www.facebook.com/" + @campaign.facebook_page, target: "_blank" %></label>
 				<% else %>
 					<label>No Facebook Page requested</label>
 				<% end %>
@@ -27,12 +24,10 @@
 				<p class="explanation">Admin Email: ( required to be the content admin )</p>
 				<%= f.text_field :facebook_admin %>
 			
-			<% elsif @campaign.facebook_page && @campaign.facebook_page.size>0 && @campaign.facebook_page != "request"
-				info = FbGraph::Page.new(@campaign.facebook_page).fetch
-			%>
+			<% elsif @campaign.facebook_page && @campaign.facebook_page.size>0 && @campaign.facebook_page != "request" %>
 			
-				<p class="explanation">Your campaign Facebook page ( <%= link_to info.name, info.link %> )</p>
-				<p>Please <%= link_to "visit the page",  "https://www.facebook.com/" + @campaign.facebook_page, target: "_blank" %> and "Like" it to get an Admin role on it.</p>
+				<p class="explanation">Your campaign Facebook page </p>
+				<p>Please "Like" the page to get an Admin role on it.</p>
 
 				<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2F<%=@campaign.facebook_page%>&amp;width&amp;height=62&amp;colorscheme=light&amp;show_faces=false&amp;header=true&amp;stream=false&amp;show_border=false&amp;appId=663078533736362" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:62px;" allowTransparency="true"></iframe>
 				

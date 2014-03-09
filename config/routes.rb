@@ -20,6 +20,7 @@ Crowdhoster::Application.routes.draw do
   namespace :admin do
     resources :campaigns
     post '/payments/:id/refund',                to: 'payments#refund_payment',               as: :admin_payment_refund
+    post '/campaigns/update_social',            to: 'campaigns#update_social',               as: :admin_update_social
   end
   
   resources :users

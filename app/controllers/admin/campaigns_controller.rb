@@ -317,4 +317,17 @@ class Admin::CampaignsController < ApplicationController
 		format.csv { send_data @payments.to_csv, filename: "#{@campaign.name}.csv" }
 	  end
 	end
+	def update_social
+		campaigns = Campaign.where("facebook_page !='' and facebook_page != 'request' ")
+		campaigns.each do |campaign|
+			begin
+				info = FbGraph::Page.new(campaign.facebook_page).fetch
+				campaign.facebook_page_likes = info.like_count
+				campaign.facebook_page_talking = info.talking_about_count
+				campaign.save()
+			rescue
+			end
+		end
+		render json: ( campaigns.to_json :only => [ :id, :name, :facebook_page, :facebook_page_likes, :facebook_page_talking ] )
+	end
 end
